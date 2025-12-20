@@ -25,6 +25,7 @@ case $1 in
 		libs="
 		lib/ui/x64/$1/libdcimgui.a
 		lib/ecs/x64/$1/flecs.o
+		lib/platform/sdl3-deb/libsdl*.deb
 		"
 		ls $libs $headers | copy_to "$target"
 	;;

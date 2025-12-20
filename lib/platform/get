@@ -9,7 +9,7 @@ sources() {
 	[ -f sdl3-devel-vc.zip ] || wget --show-progress -qO sdl3-devel-vc.zip $url
 	unzip -q sdl3-devel-vc.zip
 	mv SDL3-${SDL_VERSION} sdl3-devel-vc
-	# rm -f sdl3-devel-vc.zip
+	rm -f sdl3-devel-vc.zip
 }
 case $1 in
 	--sources) sources $2 ;;
