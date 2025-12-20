@@ -18,7 +18,6 @@ sources() {
 	tar -xf $pkg.orig.tar.xz --strip-components=1 -C libsdl3-$version
 	tar -xf $pkg-1.debian.tar.xz -C libsdl3-$version
 	LANG=C dpkg-source --before-build libsdl3-$version
-	rm -f $pkg.orig.tar.xz $pkg-1.debian.tar.xz
 }
 case $1 in
 	--sources) sources $2 ;;

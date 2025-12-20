@@ -15,6 +15,7 @@ case $1 in
     Sources)
 		artifact=$progname-$version-Sources
 		ls -d lib | copy_to artifacts/$artifact
+		rm -f artifacts/$artifact/lib/platform/sdl3-deb/*.tar.xz
 		echo artifact=$artifact
 	;;
     Debug|Release)
