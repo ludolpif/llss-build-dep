@@ -14,7 +14,7 @@ prettyos=$(./get --prettyos)
 case $1 in
     Sources)
 		artifact=$progname-$version-Sources
-		git ls-files | copy_to artifacts/$artifact
+		ls -d lib | copy_to artifacts/$artifact
 		echo artifact=$artifact
 	;;
     Debug|Release)
