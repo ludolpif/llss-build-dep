@@ -15,7 +15,7 @@ jobs:
       run: for s in lib/*/get; do (cd $(dirname $s) && ./get --sources); done
 
     - name: Produce artifacts
-      run: ./artifacts.sh Sources
+      run: ./artifacts.sh Sources >> $GITHUB_ENV
       
     - name: upload artifact
       uses: actions/upload-artifact@v4
