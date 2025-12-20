@@ -1,0 +1,14 @@
+# Apple things
+.DS_Store
+# XCode things
+project.xcworkspace
+xcuserdata
+# VisualStudio things
+*.aps
+*.vcxproj.user
+.vs
+# Output dirs
+x64
+artifacts
+# tempfiles
+*.zip

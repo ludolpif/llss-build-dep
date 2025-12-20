@@ -1,0 +1,36 @@
+From 3db4658fed202e2d1d25c76a78818f868c677578 Mon Sep 17 00:00:00 2001
+From: ludolpif <ludolpif@gmail.com>
+Date: Sat, 20 Dec 2025 14:02:39 +0100
+Subject: [PATCH] flecs: fix msbuild errors
+
+---
+ flecs.h | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/flecs/flecs.h b/flecs/flecs.h
+index 0363b88..845dd17 100644
+--- a/flecs/flecs.h
++++ b/flecs/flecs.h
+@@ -790,6 +790,19 @@ extern "C" {
+ /* Non-standard but required. If not provided by platform, add manually. */
+ #include <stdint.h>
+ 
++/* Windows workaround : if <windows.h> included before <winsock2.h>, everything goes wrong (many C4005, C2011) */
++#if defined(ECS_TARGET_WINDOWS)
++#ifndef WIN32_LEAN_AND_MEAN
++#define WIN32_LEAN_AND_MEAN
++#endif
++#ifndef NOMINMAX
++#define NOMINMAX
++#endif
++#include <winsock2.h>
++#include <ws2tcpip.h>
++#include <windows.h>
++#endif
++
+ /* Contains macros for importing / exporting symbols */
+ /*
+                                    )
+-- 
+2.47.3
+
