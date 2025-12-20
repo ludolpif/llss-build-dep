@@ -22,7 +22,6 @@ ldflags() {
 	echo $solution $project
 }
 sources() {
-	# This script part is only tested on Debian 13, to be used only when going to make ABI-breaking upgrades
 	set -xe
 	rm -rf imgui
 	git clone -q -c advice.detachedHead=false --depth 1 -b v1.92.5-docking https://github.com/ocornut/imgui.git

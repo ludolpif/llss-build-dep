@@ -1,0 +1,29 @@
+#!/bin/sh
+check() {
+	cmd="$1"; shift
+	err=$($cmd $* 2>&1 >/dev/null)
+      	res=$?
+	if [ $res -eq 127 ]; then
+		echo "You need $cmd in PATH" >&2
+	fi
+	if [ $res -ne 0 ]; then
+		echo "${PS4}$cmd $*"
+		echo $err >&2
+	fi
+	printf "%s%-72s FOUND\n" "$PS4" "$cmd"
+}
+check curl --version
+check git --version
+check make --version
+check gcc --version
+check ar --version
+check pkg-config --version
+
+if ! pkg-config sdl3 --cflags > /dev/null; then
+	cat <<"EOT"
+pkg-config sdl3 --cflags have failed
+On linux, you just need to install libsdl3-dev (debian) or sdl3-devel (redhat) package.
+EOT
+fi
+
+# So far this ./configure output no files, it just make sanity checks for static Makefiles

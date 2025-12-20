@@ -1,18 +1,26 @@
 #!/bin/sh
 SolutionDir="../../"
-SDL_VERSION=3.2.28
+version=3.2.10+ds
 
 sources() {
 	set -xe
-	rm -rf sdl3-devel-vc
-	url=https://github.com/libsdl-org/SDL/releases/download/release-${SDL_VERSION}/SDL3-devel-${SDL_VERSION}-VC.zip
-	[ -f sdl3-devel-vc.zip ] || wget --show-progress -qO sdl3-devel-vc.zip $url
-	unzip -q sdl3-devel-vc.zip
-	mv SDL3-${SDL_VERSION} sdl3-devel-vc
-	rm -f sdl3-devel-vc.zip
+	mkdir -p sdl3-deb
+	cd sdl3-deb
+	[ -f libsdl3-dev_$version-1_amd64.deb ] && exit 0
+
+	pkg=libsdl3_$version
+	for f in $pkg-1.dsc $pkg.orig.tar.xz $pkg-1.debian.tar.xz
+	do
+		[ -f $f ] || curl -o $f http://deb.debian.org/debian/pool/main/libs/libsdl3/$f
+	done
+
+	mkdir libsdl3-$version
+	tar -xf $pkg.orig.tar.xz --strip-components=1 -C libsdl3-$version
+	tar -xf $pkg-1.debian.tar.xz -C libsdl3-$version
+	LANG=C dpkg-source --before-build libsdl3-$version
 }
 case $1 in
 	--sources) sources $2 ;;
-	*) echo "Usage $0 (--sources) (Release|Debug)" >&2 ;;
+	*) echo "Usage $0 (--sources) (Debug|Release)" >&2 ;;
 esac
 

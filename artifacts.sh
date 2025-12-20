@@ -7,17 +7,20 @@ copy_to() {
     done
 }
 
-name=$(./get --name)
+progname=$(./get --name)
 version=$(./get --version)
 prettyos=$(./get --prettyos)
+
 case $1 in
     Sources)
-		target=artifacts/$name-$version-Sources
-		git ls-files | copy_to "$target"
+		artifact=$progname-$version-Sources
+		git ls-files | copy_to artifacts/$artifact
+		echo artifact=$artifact
 	;;
     Debug|Release)
-		target=artifacts/$name-$version-$prettyos-$1
-		headers="./lib/ui/dear_bindings_generated/*.h
+		artifact=$progname-$version-$prettyos-$1
+		headers="
+		lib/ui/dear_bindings_generated/*.h
 		lib/ui/imgui/*.h
 		lib/ui/dear_bindings_generated/backends/*.h
 		lib/ui/imgui/backends/*.h
@@ -27,7 +30,8 @@ case $1 in
 		lib/ecs/x64/$1/flecs.o
 		lib/platform/sdl3-deb/libsdl*.deb
 		"
-		ls $libs $headers | copy_to "$target"
+		ls -d $libs $headers | copy_to artifacts/$artifact
+		echo artifact=$artifact
 	;;
     *) echo "Usage $0 (Sources|Debug|Release)" >&2; exit 1 ;;
 esac
