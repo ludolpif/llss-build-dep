@@ -45,7 +45,7 @@ sources() {
 		../dear_venv/bin/python dear_bindings.py --backend --include ../imgui/imgui.h --imconfig-path ../imgui/imconfig.h -o ../dear_bindings_generated/backends/dcimgui_impl_sdl3 ../imgui/backends/imgui_impl_sdl3.h
 		../dear_venv/bin/python dear_bindings.py --backend --include ../imgui/imgui.h --imconfig-path ../imgui/imconfig.h -o ../dear_bindings_generated/backends/dcimgui_impl_sdlgpu3 ../imgui/backends/imgui_impl_sdlgpu3.h
 	)
-	rm -rf dear_bindings dear_venv dear_bindings_generated/*.json
+	rm -rf dear_bindings dear_venv dear_bindings_generated/*.json dear_bindings_generated/backends/*.json
 
 }
 case $1 in
