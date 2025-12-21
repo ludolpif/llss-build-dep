@@ -27,7 +27,7 @@ if ($Configuration -ne "Debug" -and $Configuration -ne "Release") {
 $sdl_version = "3.2.10"
 $sdl_url = "https://github.com/libsdl-org/SDL/releases/download/release-${sdl_version}/SDL3-devel-${sdl_version}-VC.zip"
 
-$build_dep_version = "0.2.0.0"
+$build_dep_version = "0.2.0.1"
 $build_dep_zip = "build-dep-${build_dep_version}-Sources.zip"
 $build_dep_url = "https://ludolpif.fr/pub/llss/artifacts/$build_dep_zip"
 
