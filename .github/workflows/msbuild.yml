@@ -21,7 +21,7 @@ jobs:
 
     - name: set BUILD_CONFIGURATION to Release
       shell: cmd
-      run: echo Release >> $GITHUB_ENV
+      run: echo BUILD_CONFIGURATION=Release >> $env:GITHUB_ENV
       if: github.ref_type == 'tag'
       
     - name: Add MSBuild to PATH
