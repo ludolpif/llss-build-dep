@@ -54,6 +54,7 @@ function Copy-WithStructure {
     }
 }
 
+Set-PSDebug -Strict -Step
 $metadata_h = "include/metadata.h"
 
 $version = Get-MetadataValue -FilePath $metadata_h -DefineName "LIB_VERSION_STR"
