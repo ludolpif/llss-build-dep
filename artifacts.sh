@@ -33,7 +33,7 @@ case $1 in
 		;;
 	SystemLibs)
 		ls -d lib/platform/sdl3-deb/libsdl3*deb $logs | copy_to artifacts/$artifact
-		rm -f artifacts/$artifact/lib/platform/sdl3-deb/libsdl3-doc*.tar.xz
+		rm -f artifacts/$artifact/lib/platform/sdl3-deb/libsdl3-doc*.deb
 		;;
 	*) echo "Usage $0 (Sources|Debug|Release|SystemLibs)" >&2; exit 1 ;;
 esac
