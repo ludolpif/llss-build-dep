@@ -11,9 +11,9 @@ sources() {
 	rm -rf flecs
 	mkdir flecs
 	rawbase=https://github.com/SanderMertens/flecs/raw/refs/tags/v4.1.2
-	curl -Lo flecs/LICENSE $rawbase/LICENSE
-	curl -Lo flecs/flecs.h $rawbase/distr/flecs.h
-	curl -Lo flecs/flecs.c $rawbase/distr/flecs.c
+	curl -Lfo flecs/LICENSE $rawbase/LICENSE
+	curl -Lfo flecs/flecs.h $rawbase/distr/flecs.h
+	curl -Lfo flecs/flecs.c $rawbase/distr/flecs.c
 	ls -l flecs
 	patch -p1 < 0001-flecs-fix-msbuild-errors.patch
 	sed --in-place -e 's|^#define flecs_STATIC|// \0|' flecs/flecs.h
