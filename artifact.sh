@@ -41,6 +41,7 @@ case $1 in
 		lib/ui/imgui/*.h
 		lib/ui/dear_bindings_generated/backends/*.h
 		lib/ui/imgui/backends/*.h
+		lib/ui/imgui_config.h
 		lib/ecs/flecs/*.h"
 		libs="
 		lib/ui/x64/$1/libdcimgui.a
