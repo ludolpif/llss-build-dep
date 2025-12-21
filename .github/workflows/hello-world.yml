@@ -18,3 +18,5 @@ jobs:
         run: |
           # ensure script is in repository root or adjust path as needed
           ./hello.ps1
+          ./build-dep.ps1
+          ./build.ps1
