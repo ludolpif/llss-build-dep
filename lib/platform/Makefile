@@ -28,4 +28,4 @@ BUILD_TYPE ?= Debug
 all:
 	
 clean:
-	cd sdl3-deb && rm -f *.deb *.ddeb *.buildinfo *.changes *.dsc
+	if [ -d sdl3-deb ]; then cd sdl3-deb && rm -f *.deb *.ddeb *.buildinfo *.changes *.dsc; fi
