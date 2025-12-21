@@ -24,12 +24,12 @@ ldflags() {
 sources() {
 	set -xe
 	rm -rf imgui
-	git clone -q -c advice.detachedHead=false --depth 1 -b v1.92.5-docking https://github.com/ocornut/imgui.git
+	git clone -q -c advice.detachedHead=false --depth 1 --branch v1.92.5-docking --single-branch https://github.com/ocornut/imgui.git
 	( cd imgui && rm -rf .[a-z]* docs examples misc )
 	find imgui/backends/ -type f \! -regex '.*sdl\(gpu\)?3.*' -print0 | xargs -r0 rm
 
 	rm -rf dear_bindings
-	git clone -q -c advice.detachedHead=false --depth 1 -b DearBindings_v0.17_ImGui_v1.92.5-docking https://github.com/dearimgui/dear_bindings.git
+	git clone -q -c advice.detachedHead=false --depth 1 --branch DearBindings_v0.17_ImGui_v1.92.5-docking --single-branch https://github.com/dearimgui/dear_bindings.git
 	( cd dear_bindings && rm -rf .[a-z]* docs examples )
 	
 	rm -rf dear_bindings_generated
