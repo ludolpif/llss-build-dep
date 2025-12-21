@@ -29,13 +29,7 @@ cflags() {
 		# removed RelWithDebInfo, we always can strip debug symbols after build
 		*) echo "Bad BUILD_TYPE, should be Debug or Release" >&2; exit 1 ;;
 	esac
-	#case $(uname -s) in
-	#	Linux)      lto="-flto=auto" ;;
-	#	Darwin)     lto="-flto=auto" ;;
-	#	Windows_NT) lto="" ;;
-	#	*)          echo "Unknown platform" >&2
-	#esac
-	echo $solution # $lto (is very slow)
+	echo $solution # -flto=auto (is very slow)
 }
 ldflags() {
 	solution=""
@@ -48,7 +42,6 @@ prettyos() {
 	case $(uname -s) in
 		Linux)      os="$( . /etc/os-release && echo $ID-$VERSION_CODENAME )" ;;
 		Darwin)     os="MacOS" ;;
-		Windows_NT) os="Windows" ;;
 		*)          echo "Unknown platform" >&2
 	esac
 	echo $os
