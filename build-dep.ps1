@@ -2,7 +2,8 @@ $version = "3.2.10"
 $url = "https://github.com/libsdl-org/SDL/releases/download/release-${version}/SDL3-devel-${version}-VC.zip"
 
 Set-PSDebug -Strict -Step
-cd "lib\platform"
+
+cd ".\lib\platform"
 Remove-Item -Recurse -Force -Path "sdl3-devel-vc" -ErrorAction SilentlyContinue
 if (-Not (Test-Path "sdl3-devel-vc.zip")) {
     Invoke-WebRequest -Uri $url -OutFile "sdl3-devel-vc.zip"
