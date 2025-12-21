@@ -31,16 +31,13 @@ jobs:
       run: Get-ChildItem -Recurse
 
     - name: build-dep
-      shell: pwsh
-      run: ./build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
+      run: .\build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: build
-      shell: pwsh
-      run: ./build.ps1 ${{env.BUILD_CONFIGURATION}}
+      run: .\build.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: produce artifact
-      shell: pwsh
-      run: ./artifact.ps1 ${{env.BUILD_CONFIGURATION}} >> $GITHUB_ENV
+      run: .\artifact.ps1 ${{env.BUILD_CONFIGURATION}} >> $GITHUB_ENV
       
     - name: upload artifact
       uses: actions/upload-artifact@v4
