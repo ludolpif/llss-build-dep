@@ -64,11 +64,21 @@ $artifact = "$progname-$version-$prettyos-$Configuration"
 Remove-Item "artifacts/$artifact" -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force "artifacts/$artifact" | Out-Null
 
-$paths = @(
-	"lib/ui/x64/$Configuration",
-	"lib/ecs/x64/$Configuration",
-	"lib/platform/sdl3-devel-vc",
+
+$logs = @(
 	"configure-$progname.log"
 )
-Copy-WithStructure -Paths $paths -DestinationRoot "artifacts/$artifact"
+$headers = @(
+		"lib/ui/dear_bindings_generated/*.h",
+		"lib/ui/imgui/*.h",
+		"lib/ui/dear_bindings_generated/backends/*.h",
+		"lib/ui/imgui/backends/*.h",
+		"lib/ecs/flecs/*.h"
+)
+$libs = @(
+	"lib/ui/x64/$Configuration",
+	"lib/ecs/x64/$Configuration",
+	"lib/platform/sdl3-devel-vc"
+)
+Copy-WithStructure -Paths $libs $headers $logs -DestinationRoot "artifacts/$artifact"
 Write-Output "artifact=$artifact"
