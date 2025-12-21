@@ -15,8 +15,4 @@ jobs:
 
       - name: Run build.ps1 with PowerShell Core
         shell: pwsh
-        run: |
-          # ensure script is in repository root or adjust path as needed
-          ./hello.ps1 Debug
-          ./build-dep.ps1 Debug
-          ./build.ps1 Debug
+        run: ./hello.ps1 Debug
