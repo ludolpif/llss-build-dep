@@ -29,8 +29,8 @@ jobs:
     - name: show tree
       run: Get-ChildItem -Recurse
 
-    - name: build-dep
-      run: .\build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
+    #- name: build-dep
+    #  run: .\build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: build
       run: .\build.ps1 ${{env.BUILD_CONFIGURATION}}
