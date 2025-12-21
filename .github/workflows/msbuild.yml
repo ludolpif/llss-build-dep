@@ -27,19 +27,15 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: show tree
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: Get-ChildItem -Recurse | Select-Object Mode, LastWriteTime, Length, Name
+      run: Get-ChildItem -Recurse -Force
 
     - name: build-dep
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: .\build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: .\build.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: produce artifact
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: .\artifact.ps1 ${{env.BUILD_CONFIGURATION}} >> $GITHUB_ENV
       
     - name: upload artifact

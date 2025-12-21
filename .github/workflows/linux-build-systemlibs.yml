@@ -21,15 +21,12 @@ jobs:
       run: sudo apt update
 
     - name: show tree
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: ls -lR
 
     - name: build-dep
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: ./get --build-dep ${{env.BUILD_CONFIGURATION}}
 
     - name: produce artifact
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: ./artifacts.sh ${{env.BUILD_CONFIGURATION}} >> $GITHUB_ENV
       
     - name: upload artifact
