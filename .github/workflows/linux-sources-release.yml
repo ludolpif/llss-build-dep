@@ -15,7 +15,7 @@ jobs:
     
     - name: get sources
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: ./get --sources)
+      run: ./get --sources
 
     - name: produce artifact
       working-directory: ${{env.GITHUB_WORKSPACE}}
