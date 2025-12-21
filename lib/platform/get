@@ -27,7 +27,7 @@ sources() {
 	pkg=libsdl3_$version
 	for f in $pkg-1.dsc $pkg.orig.tar.xz $pkg-1.debian.tar.xz
 	do
-		[ -f $f ] || curl -o $f http://deb.debian.org/debian/pool/main/libs/libsdl3/$f
+		[ -f $f ] || curl -Lfo $f http://deb.debian.org/debian/pool/main/libs/libsdl3/$f
 	done
 
 	mkdir libsdl3-$version
