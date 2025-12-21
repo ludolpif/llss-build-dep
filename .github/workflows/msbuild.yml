@@ -20,6 +20,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: set BUILD_CONFIGURATION to Release
+      shell: cmd
       run: echo Release >> $GITHUB_ENV
       if: github.ref_type == 'tag'
       
@@ -29,14 +30,17 @@ jobs:
     - name: show tree
       run: Get-ChildItem -Recurse
 
-    #- name: build-dep
-    #  run: .\build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
+    - name: build-dep
+      shell: pwsh
+      run: ./build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: build
-      run: .\build.ps1 ${{env.BUILD_CONFIGURATION}}
+      shell: pwsh
+      run: ./build.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: produce artifact
-      run: .\artifact.ps1 ${{env.BUILD_CONFIGURATION}} >> $GITHUB_ENV
+      shell: pwsh
+      run: ./artifact.ps1 ${{env.BUILD_CONFIGURATION}} >> $GITHUB_ENV
       
     - name: upload artifact
       uses: actions/upload-artifact@v4
