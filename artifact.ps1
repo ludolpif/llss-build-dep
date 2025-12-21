@@ -80,5 +80,5 @@ $libs = @(
 	"lib/ecs/x64/$Configuration",
 	"lib/platform/sdl3-devel-vc"
 )
-Copy-WithStructure -Paths $libs $headers $logs -DestinationRoot "artifacts/$artifact"
+Copy-WithStructure -Paths $($libs; $headers; $logs) -DestinationRoot "artifacts/$artifact"
 Write-Output "artifact=$artifact"
