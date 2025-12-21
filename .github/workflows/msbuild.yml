@@ -27,15 +27,19 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: show tree
+      shell: pwsh
       run: Get-ChildItem -Recurse -Force
 
     - name: build-dep
+      shell: pwsh
       run: .\build-dep.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: build
+      shell: pwsh
       run: .\build.ps1 ${{env.BUILD_CONFIGURATION}}
 
     - name: produce artifact
+      shell: pwsh
       run: .\artifact.ps1 ${{env.BUILD_CONFIGURATION}} >> $GITHUB_ENV
       
     - name: upload artifact
