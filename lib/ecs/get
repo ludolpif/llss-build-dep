@@ -18,7 +18,7 @@
 SolutionDir="../../"
 
 cflags() {
-	solution=`${SolutionDir}get --cflags $1`
+	solution=`${SolutionDir}get --cflags "$1"`
 	project="-std=gnu99 -Iflecs -Dflecs_EXPORTS"
 	echo $solution $project
 }
@@ -34,9 +34,13 @@ sources() {
 	patch -p1 < 0001-flecs-fix-msbuild-errors.patch
 	sed --in-place -e 's|^#define flecs_STATIC|// \0|' flecs/flecs.h
 }
-case $1 in
-	--cflags) cflags $2 ;;
-	--sources) sources $2 ;;
-	*) echo "Usage $0 (--cflags|--sources) (Release|Debug)" >&2 ;;
+_usage() {
+	echo "Usage $0 (--cflags|--sources) [Debug|Release]" >&2
+	exit 1
+}
+case "$1" in
+	--cflags) cflags "$2" ;;
+	--sources) sources ;;
+	*) _usage ;;
 esac
 

@@ -18,7 +18,7 @@
 SolutionDir="../../"
 
 cflags() {
-	solution=`${SolutionDir}get --cflags $1`
+	solution=`${SolutionDir}get --cflags "$1"`
 	project="-std=c++14 -fPIC -fvisibility=hidden"
 	project="$project
 	-Dimgui_EXPORTS
@@ -33,7 +33,7 @@ cflags() {
 	echo $solution $project $libsdl3
 }
 ldflags() {
-	solution=`${SolutionDir}get --ldflags $1`
+	solution=`${SolutionDir}get --ldflags "$1"`
 	project="-Wl,-Bsymbolic"
 	echo $solution $project
 }
@@ -64,10 +64,14 @@ sources() {
 	rm -rf dear_bindings dear_venv dear_bindings_generated/*.json dear_bindings_generated/backends/*.json
 
 }
+_usage() {
+	echo "Usage $0 (--cflags|--ldflags|--sources) [Debug|Release]" >&2
+	exit 1
+}
 case $1 in
-	--cflags) cflags $2 ;;
-	--ldflags) ldflags $2 ;;
-	--sources) sources $2 ;;
-	*) echo "Usage $0 (--cflags|--ldflags|--sources) (Release|Debug)" >&2 ;;
+	--cflags) cflags "$2" ;;
+	--ldflags) ldflags "$2" ;;
+	--sources) sources ;;
+	*) _usage ;;
 esac
 

@@ -19,13 +19,14 @@ build_dep() {
 	case "$1" in
 		Debug|Release) _prebuilt_systemlibs; sources ;;
 		SystemLibs) _build_systemlibs ;;
-		*) echo "Bad BUILD_TYPE, should be (Debug|Release|SystemLibs)" >&2; exit 1 ;;
+		*) _usage ;;
 	esac
 }
 cflags() {
 	case "$1" in
 		Debug) solution="-ggdb3 -O0 -D_DEBUG" ;;
 		Release) solution="-g -O2 -DNDEBUG" ;;
+		*) _usage ;;
 	esac
 	echo $solution # -flto=auto (is very slow)
 }
@@ -72,21 +73,17 @@ _prebuilt_systemlibs() {
 }
 
 _usage() {
-	echo "Usage $0 (--build-dep|--cflags|--ldflags|--name|--prettyos|--sources|--version) (Debug|Release|SystemLibs)" >&2
+	echo "Usage $0 (--build-dep|--cflags|--ldflags|--name|--prettyos|--sources|--version) [Debug|Release|SystemLibs]" >&2
 	exit 1
 }
-case "$2" in
-	Debug|Release|SystemLibs) ;;
-	*) _usage ;;
-esac
 case "$1" in
-	--build-dep) build_dep $2 ;;
-	--cflags) cflags $2 ;;
-	--ldflags) ldflags $2 ;;
-	--name) name $2 ;;
-	--prettyos) prettyos $2 ;;
-	--sources) sources $2 ;;
-	--version) version $2 ;;
+	--build-dep) build_dep "$2" ;;
+	--cflags) cflags "$2" ;;
+	--ldflags) ldflags "$2" ;;
+	--name) name ;;
+	--prettyos) prettyos ;;
+	--sources) sources ;;
+	--version) version ;;
 	*) _usage ;;
 esac
 
