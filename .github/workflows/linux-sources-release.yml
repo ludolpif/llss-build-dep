@@ -13,6 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: show tree
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: ls -lR
+
     - name: get sources
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: ./get --sources

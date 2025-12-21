@@ -25,6 +25,10 @@ jobs:
     - name: apt update
       run: sudo apt update
 
+    - name: show tree
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: ls -lR
+
     - name: build-dep
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: ./get --build-dep ${{env.BUILD_CONFIGURATION}}
