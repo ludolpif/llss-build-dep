@@ -8,7 +8,6 @@ if ($Configuration -ne "Debug" -and $Configuration -ne "Release") {
     exit 1
 }
 
-Set-PSDebug -Step
 # MSBuild can came from VS2022 Community edition on a local dev computer, or VS2022 Enterprise on GitHub for exemple.
 $msbuild = Get-ChildItem `
     -Path "C:\Program Files\Microsoft Visual Studio\2022\*\MSBuild\Current\Bin\MSBuild.exe" `

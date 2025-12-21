@@ -15,4 +15,7 @@ jobs:
 
       - name: Run build.ps1 with PowerShell Core
         shell: pwsh
-        run: ./hello.ps1 Debug
+        run: |
+        ./hello.ps1 Debug
+        ./build-dep.ps1 Debug
+        ./build.ps1 Debug
