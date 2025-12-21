@@ -8,7 +8,7 @@ if ($Configuration -ne "Debug" -and $Configuration -ne "Release") {
     exit 1
 }
 
-Set-PSDebug -Strict -Step
+Set-PSDebug -Step
 $version = "3.2.10"
 $url = "https://github.com/libsdl-org/SDL/releases/download/release-${version}/SDL3-devel-${version}-VC.zip"
 
