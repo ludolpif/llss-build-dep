@@ -58,7 +58,7 @@ _build_systemlibs() {
 _prebuilt_systemlibs() {
 	set -xe
         rm -rf lib
-	zipname=build-dep-$(version)-SystemLibs.zip
+	zipname=build-dep-$(version)-$(prettyos)-SystemLibs.zip
         url=https://ludolpif.fr/pub/llss/artifacts/$zipname
         [ -f $zipname ] || curl -o $zipname $url
         unzip -q $zipname
