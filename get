@@ -38,7 +38,7 @@ prettyos() {
 	echo $os
 }
 version() {
-	echo "0.2.0.0"
+	grep "define LIB_VERSION_STR" include/metadata.h | cut -d'"' -f2
 }
 case $1 in
 	--build-dep) build_dep $2 ;;
