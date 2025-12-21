@@ -68,6 +68,7 @@ $paths = @(
 	"lib/ui/x64/$Configuration",
 	"lib/ecs/x64/$Configuration",
 	"lib/platform/sdl3-devel-vc",
+	"configure-$progname.log",
 )
 Copy-WithStructure -Paths $paths -DestinationRoot "artifacts/$artifact"
 Write-Output "artifact=$artifact"
