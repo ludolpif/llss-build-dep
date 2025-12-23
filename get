@@ -56,6 +56,7 @@ version() {
 	grep "define LIB_VERSION_STR" include/metadata.h | cut -d'"' -f2
 }
 _build_systemlibs() {
+	# For now, this makes sense only for ubuntu 22.04 for Github Runners
 	set -xe
 	( cd lib/platform && ./get --sources )
 	# SDL3 build-dep

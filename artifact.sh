@@ -15,6 +15,9 @@
 #
 # Copyright 2025 ludolpif <ludolpif@gmail.com>
 #
+# TODO try to replace with make install with $(DESTDIR) see
+# https://www.gnu.org/prep/standards/html_node/DESTDIR.html
+# https://stackoverflow.com/questions/11307465/destdir-and-prefix-of-make
 copy_to() {
 	mkdir -p "$1"
 	while read -r path; do
@@ -26,32 +29,51 @@ copy_to() {
 progname=$(./get --name)
 version=$(./get --version)
 prettyos=$(./get --prettyos)
-artifact=$progname-$version-$prettyos-$1
 logs="configure-$progname.log"
 
+compress=
+if [ "x$1" = "x--zip" ]; then compress=.zip; shift; fi
+
+headers="
+lib/ecs/flecs/*.h
+lib/ui/imgui_config.h
+lib/ui/imgui/*.h
+lib/ui/imgui/backends/*.h
+lib/ui/dear_bindings_generated/*.h
+lib/ui/dear_bindings_generated/backends/*.h
+"
+sources="
+lib/ecs/flecs/*.c
+lib/ui/imgui/*.cpp
+lib/ui/imgui/backends/*.cpp
+lib/ui/dear_bindings_generated/*.cpp
+lib/ui/dear_bindings_generated/backends/*.cpp
+"
+set -e
+artifact=$progname-$version-$prettyos-$1
 case $1 in
 	Sources)
 		artifact=$progname-$version-Sources
-		ls -d lib $logs | copy_to artifacts/$artifact
-		rm -f artifacts/$artifact/lib/platform/sdl3-deb/*.tar.xz
-		;;
+		rm -rf artifacts/$artifact artifacts/$artifact$compress
+		ls -d $headers $sources | copy_to artifacts/$artifact
+	;;
 	Debug|Release)
-		headers="
-		lib/ui/dear_bindings_generated/*.h
-		lib/ui/imgui/*.h
-		lib/ui/dear_bindings_generated/backends/*.h
-		lib/ui/imgui/backends/*.h
-		lib/ui/imgui_config.h
-		lib/ecs/flecs/*.h"
 		libs="
 		lib/ui/x64/$1/libdcimgui.a
-		lib/ecs/x64/$1/flecs.o"
+		lib/ecs/x64/$1/flecs.o
+		"
+		rm -rf artifacts/$artifact artifacts/$artifact$compress
 		ls -d $libs $headers $logs | copy_to artifacts/$artifact
-		;;
+	;;
 	SystemLibs)
-		ls -d lib/platform/sdl3-deb/libsdl3*deb | copy_to artifacts/$artifact
-		rm -f artifacts/$artifact/lib/platform/sdl3-deb/libsdl3-doc*.deb
-		;;
-	*) echo "Usage $0 (Sources|Debug|Release|SystemLibs)" >&2; exit 1 ;;
+		# For now, this makes sense only for ubuntu 22.04 for Github Runners
+		rm -rf artifacts/$artifact artifacts/$artifact$compress
+		ls -d lib/platform/sdl3-deb/libsdl3*deb | grep -v libsdl3-doc_ | copy_to artifacts/$artifact
+	;;
+	*) echo "Usage $0 [--zip] (Sources|Debug|Release|SystemLibs)" >&2; exit 1 ;;
 esac
-echo artifact=$artifact
+case $compress in
+	.zip) ( cd artifacts/$artifact && zip -r ../$artifact.zip . && cd ../.. && rm -rf artifacts/$artifact );;
+	"") ls -d artifacts/$artifact/* >/dev/null # check if at least one file was installed as zip do
+esac
+echo artifact=$artifact$compress

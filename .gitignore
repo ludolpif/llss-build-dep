@@ -7,8 +7,9 @@ xcuserdata
 *.aps
 *.vcxproj.user
 .vs
+# build-dep things
+*.zip
+*.log
 # Output dirs
 x64
 artifacts
-# tempfiles
-*.zip
