@@ -18,9 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: set BUILD_CONFIGURATION to Release
-      run: echo BUILD_CONFIGURATION=Release >> $GITHUB_ENV
-      if: github.ref_type == 'tag'
+#    - name: set BUILD_CONFIGURATION to Release
+#      run: echo BUILD_CONFIGURATION=Release >> $GITHUB_ENV
+#      if: github.ref_type == 'tag'
       
     - name: apt update
       run: sudo apt update
