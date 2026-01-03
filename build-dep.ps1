@@ -24,10 +24,29 @@ if ($Configuration -ne "Debug" -and $Configuration -ne "Release") {
     exit 1
 }
 
-$sdl_version = "3.2.10"
+function Get-MetadataValue {
+    param (
+        [Parameter(Mandatory)]
+        [string]$FilePath,
+
+        [Parameter(Mandatory)]
+        [string]$DefineName
+    )
+
+    $pattern = "^\s*#define\s+$DefineName\s+""([^""]+)"""
+    $match = Select-String -Path $FilePath -Pattern $pattern
+
+    if (-not $match) {
+        throw "Can't find $DefineName in $FilePath"
+    }
+
+    return $match.Matches[0].Groups[1].Value
+}
+
+$sdl_version = Get-MetadataValue -FilePath "include/build-dep-version.h" -DefineName "BUILD_DEP_SDL_VERSION_STR"
 $sdl_url = "https://github.com/libsdl-org/SDL/releases/download/release-${sdl_version}/SDL3-devel-${sdl_version}-VC.zip"
 
-$build_dep_version = "0.2.0.1"
+$build_dep_version = Get-MetadataValue -FilePath "include/build-dep-version.h" -DefineName "BUILD_DEP_VERSION_STR"
 $build_dep_zip = "build-dep-${build_dep_version}-Sources.zip"
 $build_dep_url = "https://ludolpif.fr/pub/llss/artifacts/$build_dep_zip"
 

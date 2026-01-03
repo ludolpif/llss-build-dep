@@ -10,6 +10,9 @@ xcuserdata
 # build-dep things
 *.zip
 *.log
-# Output dirs
+# output dirs
 x64
-artifacts
+/artifacts
+/lib/ecs/flecs/
+/lib/ui/dear_bindings_generated/
+/lib/ui/imgui/

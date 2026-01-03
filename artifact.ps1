@@ -70,9 +70,7 @@ function Copy-WithStructure {
     }
 }
 
-$metadata_h = "include/metadata.h"
-
-$version = Get-MetadataValue -FilePath $metadata_h -DefineName "LIB_VERSION_STR"
+$version = Get-MetadataValue -FilePath "include/build-dep-version.h" -DefineName "BUILD_DEP_VERSION_STR"
 $progname = "build-dep"
 $prettyos = "Windows"
 $artifact = "$progname-$version-$prettyos-$Configuration"
@@ -82,20 +80,21 @@ New-Item -ItemType Directory -Force "artifacts/$artifact" | Out-Null
 
 
 $logs = @(
-	"configure-$progname.log"
-)
+        "configure-$progname.log"
+        )
 $headers = @(
-		"lib/ui/dear_bindings_generated/*.h",
-		"lib/ui/imgui/*.h",
-		"lib/ui/dear_bindings_generated/backends/*.h",
-		"lib/ui/imgui/backends/*.h",
-		"lib/ui/imgui_config.h",
-		"lib/ecs/flecs/*.h"
-)
+        "include/build-dep-version.h",
+        "lib/ui/dear_bindings_generated/*.h",
+        "lib/ui/imgui/*.h",
+        "lib/ui/dear_bindings_generated/backends/*.h",
+        "lib/ui/imgui/backends/*.h",
+        "lib/ui/imgui_config.h",
+        "lib/ecs/flecs/*.h"
+        )
 $libs = @(
-	"lib/ui/x64/$Configuration",
-	"lib/ecs/x64/$Configuration",
-	"lib/platform/sdl3-devel-vc"
-)
+        "lib/ui/x64/$Configuration",
+        "lib/ecs/x64/$Configuration",
+        "lib/platform/sdl3-devel-vc"
+        )
 Copy-WithStructure -Paths $($libs; $headers; $logs) -DestinationRoot "artifacts/$artifact"
 Write-Output "artifact=$artifact"

@@ -53,7 +53,7 @@ sources() {
 	done
 }
 version() {
-	grep "define LIB_VERSION_STR" include/metadata.h | cut -d'"' -f2
+	grep "define BUILD_DEP_VERSION_STR" include/build-dep-version.h | cut -d'"' -f2
 }
 _build_systemlibs() {
 	# For now, this makes sense only for ubuntu 22.04 for Github Runners
@@ -69,7 +69,7 @@ _prebuilt_systemlibs() {
 	zipname=build-dep-$(version)-$(prettyos)-SystemLibs.zip
         url=https://ludolpif.fr/pub/llss/artifacts/$zipname
         [ -f $zipname ] || curl -Lfo $zipname $url
-        unzip -q $zipname
+        unzip -qo $zipname
         rm -f $zipname
 }
 
