@@ -35,7 +35,7 @@ compress=
 if [ "x$1" = "x--zip" ]; then compress=.zip; shift; fi
 
 headers="
-include/build-dep-version.h
+include/version-build-dep.h
 lib/ecs/flecs/*.h
 lib/ui/imgui_config.h
 lib/ui/imgui/*.h

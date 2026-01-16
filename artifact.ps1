@@ -70,7 +70,7 @@ function Copy-WithStructure {
     }
 }
 
-$version = Get-MetadataValue -FilePath "include/build-dep-version.h" -DefineName "BUILD_DEP_VERSION_STR"
+$version = Get-MetadataValue -FilePath "include/version-build-dep.h" -DefineName "BUILD_DEP_VERSION_STR"
 $progname = "build-dep"
 $prettyos = "Windows"
 $artifact = "$progname-$version-$prettyos-$Configuration"
@@ -83,7 +83,7 @@ $logs = @(
         "configure-$progname.log"
         )
 $headers = @(
-        "include/build-dep-version.h",
+        "include/version-build-dep.h",
         "lib/ui/dear_bindings_generated/*.h",
         "lib/ui/imgui/*.h",
         "lib/ui/dear_bindings_generated/backends/*.h",

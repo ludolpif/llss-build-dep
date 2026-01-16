@@ -43,10 +43,10 @@ function Get-MetadataValue {
     return $match.Matches[0].Groups[1].Value
 }
 
-$sdl_version = Get-MetadataValue -FilePath "include/build-dep-version.h" -DefineName "BUILD_DEP_SDL_VERSION_STR"
+$sdl_version = Get-MetadataValue -FilePath "include/version-build-dep.h" -DefineName "BUILD_DEP_SDL_VERSION_STR"
 $sdl_url = "https://github.com/libsdl-org/SDL/releases/download/release-${sdl_version}/SDL3-devel-${sdl_version}-VC.zip"
 
-$build_dep_version = Get-MetadataValue -FilePath "include/build-dep-version.h" -DefineName "BUILD_DEP_VERSION_STR"
+$build_dep_version = Get-MetadataValue -FilePath "include/version-build-dep.h" -DefineName "BUILD_DEP_VERSION_STR"
 $build_dep_zip = "build-dep-${build_dep_version}-Sources.zip"
 $build_dep_url = "https://ludolpif.fr/pub/llss/artifacts/$build_dep_zip"
 
