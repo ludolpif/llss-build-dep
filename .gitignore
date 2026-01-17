@@ -13,7 +13,7 @@ xcuserdata
 # output dirs
 x64
 /artifacts
-/lib/events/
+/lib/events/dmon/
 /lib/ecs/flecs/
 /lib/ui/dear_bindings_generated/
 /lib/ui/imgui/
