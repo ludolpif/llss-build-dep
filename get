@@ -47,7 +47,7 @@ prettyos() {
 }
 sources() {
 	set -xe
-	for dir in ecs ui
+	for dir in ecs events ui
 	do
 		( cd lib/$dir && ./get --sources )
 	done

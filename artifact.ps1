@@ -84,17 +84,18 @@ $logs = @(
         )
 $headers = @(
         "include/version-build-dep.h",
+        "lib/ecs/flecs/*.h",
+        "lib/events/dmon/*.h",
         "lib/ui/dear_bindings_generated/*.h",
-        "lib/ui/imgui/*.h",
         "lib/ui/dear_bindings_generated/backends/*.h",
+        "lib/ui/imgui/*.h",
         "lib/ui/imgui/backends/*.h",
         "lib/ui/imgui_config.h",
-        "lib/ecs/flecs/*.h"
         )
 $libs = @(
-        "lib/ui/x64/$Configuration",
         "lib/ecs/x64/$Configuration",
-        "lib/platform/sdl3-devel-vc"
+        "lib/platform/sdl3-devel-vc",
+        "lib/ui/x64/$Configuration",
         )
 Copy-WithStructure -Paths $($libs; $headers; $logs) -DestinationRoot "artifacts/$artifact"
 Write-Output "artifact=$artifact"

@@ -37,18 +37,22 @@ if [ "x$1" = "x--zip" ]; then compress=.zip; shift; fi
 headers="
 include/version-build-dep.h
 lib/ecs/flecs/*.h
-lib/ui/imgui_config.h
-lib/ui/imgui/*.h
-lib/ui/imgui/backends/*.h
+lib/events/dmon/*.h
 lib/ui/dear_bindings_generated/*.h
 lib/ui/dear_bindings_generated/backends/*.h
+lib/ui/imgui/*.h
+lib/ui/imgui/backends/*.h
+lib/ui/imgui_config.h
+"
+licences="
+lib/*/*/LICENSE
 "
 sources="
 lib/ecs/flecs/*.c
-lib/ui/imgui/*.cpp
-lib/ui/imgui/backends/*.cpp
 lib/ui/dear_bindings_generated/*.cpp
 lib/ui/dear_bindings_generated/backends/*.cpp
+lib/ui/imgui/*.cpp
+lib/ui/imgui/backends/*.cpp
 "
 set -e
 artifact=$progname-$version-$prettyos-$1
@@ -56,7 +60,7 @@ case $1 in
 	Sources)
 		artifact=$progname-$version-Sources
 		rm -rf artifacts/$artifact artifacts/$artifact$compress
-		ls -d $headers $sources | copy_to artifacts/$artifact
+		ls -d $headers $licences $sources | copy_to artifacts/$artifact
 	;;
 	Debug|Release)
 		libs="
