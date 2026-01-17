@@ -90,12 +90,12 @@ $headers = @(
         "lib/ui/dear_bindings_generated/backends/*.h",
         "lib/ui/imgui/*.h",
         "lib/ui/imgui/backends/*.h",
-        "lib/ui/imgui_config.h",
+        "lib/ui/imgui_config.h"
         )
 $libs = @(
         "lib/ecs/x64/$Configuration",
         "lib/platform/sdl3-devel-vc",
-        "lib/ui/x64/$Configuration",
+        "lib/ui/x64/$Configuration"
         )
 Copy-WithStructure -Paths $($libs; $headers; $logs) -DestinationRoot "artifacts/$artifact"
 Write-Output "artifact=$artifact"
