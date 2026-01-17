@@ -25,7 +25,7 @@ sources() {
 	rawbase=https://raw.githubusercontent.com/septag/dmon/$DMON_COMMIT
 	curl -Lfo dmon/LICENSE $rawbase/LICENSE
 	curl -Lfo dmon/dmon.h $rawbase/dmon.h
-	curl -Lfo dmon/dmon-extra.h $rawbase/dmon_extra.h
+	curl -Lfo dmon/dmon_extra.h $rawbase/dmon_extra.h
 	ls -l dmon
 }
 _usage() {
