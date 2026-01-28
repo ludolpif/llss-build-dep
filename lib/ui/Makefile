@@ -31,7 +31,7 @@ LDFLAGS += $(shell ./get --ldflags $(BUILD_TYPE))
 ARFLAGS = rcs
 
 OBJS := imgui.o imgui_demo.o imgui_draw.o imgui_tables.o imgui_widgets.o imgui_impl_sdl3.o imgui_impl_sdlgpu3.o
-OBJS += dcimgui.o dcimgui_impl_sdl3.o dcimgui_impl_sdlgpu3.o
+OBJS += dcimgui.o dcimgui_internal.o dcimgui_impl_sdl3.o dcimgui_impl_sdlgpu3.o
 OBJS := $(OBJS:%.o=$(ODIR)%.o)
 
 VPATH := imgui:imgui/backends:dear_bindings_generated:dear_bindings_generated/backends
